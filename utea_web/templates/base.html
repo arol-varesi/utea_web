@@ -1,0 +1,67 @@
+{% load static %}
+<!doctype html>
+<html lang="it">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+
+        <title>{% block head_title %}UTEA WebHome{% endblock head_title%}</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+
+                <a class="navbar-brand" href="/">AROL UTEA</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Lista Utenti <span class="sr-only">(current)</span></a>
+                        </li>
+                        {% if false %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Username
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="">Profilo</a>
+                                    <a class="dropdown-item" href="">Aggiorna Password</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="">Esci</a>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Registrazione</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Login</a>
+                            </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+        <script src="{% static 'js/popper.min.js'%}"></script>
+        <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    </body>
+</html>
