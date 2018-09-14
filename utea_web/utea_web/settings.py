@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core',     # Homepage and global views
+    'accounts',
     'moduli',
 
 ]
