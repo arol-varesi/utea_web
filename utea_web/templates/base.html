@@ -22,29 +22,33 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="form-inline my-2 my-lg-0" action="{# % url 'funzione_cerca' % #}">
+                        <input name="q" class="form-control mr-sm-2" type="search" placeholder="Cosa stai cercando?" aria-label="Search">
+                        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Cerca</button>
+                    </form>
 
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="">Lista Utenti <span class="sr-only">(current)</span></a>
                         </li>
-                        {% if false %}
+                        {% if request.user.is_authenticated %}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Username
+                                    {{ request.user.username }}
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="">Profilo</a>
-                                    <a class="dropdown-item" href="">Aggiorna Password</a>
+                                    <a class="dropdown-item" href="{# % url 'user_profile' username=request.user.username % #}">Profilo</a>
+                                    <a class="dropdown-item" href="{% url 'password_change' %}">Aggiorna Password</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="">Esci</a>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">Esci</a>
                                 </div>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="">Registrazione</a>
+                                <a class="nav-link" href="{% url 'registration_view' %}">Registrazione</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">Login</a>
+                                <a class="nav-link" href="{% url 'login' %}">Login</a>
                             </li>
                         {% endif %}
 
