@@ -1,4 +1,4 @@
-#!/Users/amelamela/Developer/django/utea_web/v_env/bin/python3
+#!/Users/amelamela/Developer/django/utea_web_project/v_env/bin/python3
 from django.core import management
 
 if __name__ == "__main__":
