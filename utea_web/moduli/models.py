@@ -4,13 +4,13 @@ from django.db import models
 
 # Create your models here.
 
-class TipoComponente(models.Model):
+class Tipo_componente(models.Model):
     """
     Tipologia, o meglio famiglia del componente.
     Oltre al tipo viene anche indicato il prefisso utilizzato (max 3 lettere)
     """
     tipo = models.CharField(max_length = 30)
-    prefisso = models.CharField(max_length = 3)
+    prefisso = models.CharField(max_length = 3, unique = True)
 
     def __str__(self):
         return self.tipo
@@ -31,14 +31,26 @@ class Sigla(models.Model):
         (es. "Fotocellula", "Sensore di prossimità", "Motore")
     """
     sigla = models.CharField(max_length = 5)
-    descrizione = CharField(max_length = 30)
-    traduzione = models.ManyToManyField(Descrizione, 
-                                        through='Traduzioni',
-                                        through_fields=('sigla','lingua'),)
-    tipo_componente = models.ForeignKey(TipoComponente, on_delete=models.CASCADE)
+    descrizione = models.CharField(max_length = 30)
+    tipo = models.ForeignKey(Tipo_componente, on_delete=models.CASCADE)
+    traduzione = models.ManyToManyField("Traduzione")
 
     def __str__(self):
         return self.sigla
 
     class Meta:
         verbose_name_plural = "sigle"
+
+
+class Traduzione(models.Model):
+#    """
+#    Tabella delle traduzioni delle descrizioni delle sigle
+#    """
+    lingua = models.ForeignKey("core.Lingua", on_delete=models.CASCADE)
+    traduzione = models.CharField(max_length = 30)
+
+    def __str__(self):
+        return f"{self.lingua}:{self.traduzione}"
+
+    class Meta:
+        verbose_name_plural = "traduzioni"
