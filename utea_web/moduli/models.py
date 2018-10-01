@@ -7,10 +7,10 @@ from django.db import models
 class TipoComponente(models.Model):
     """
     Tipologia, o meglio famiglia del componente.
-    Oltre al tipo viene anche indicato un nome corto (in inglese)
+    Oltre al tipo viene anche indicato il prefisso utilizzato (max 3 lettere)
     """
-    tipo = models.CharField(max_length = 20)
-    abbreviato = models.CharField(max_length = 8)
+    tipo = models.CharField(max_length = 30)
+    prefisso = models.CharField(max_length = 3)
 
     def __str__(self):
         return self.tipo
@@ -18,7 +18,6 @@ class TipoComponente(models.Model):
     class Meta:
         verbose_name = "tipologia di componente"
         verbose_name_plural = "tipologie di componenti"
-
 
 
 
@@ -32,7 +31,10 @@ class Sigla(models.Model):
         (es. "Fotocellula", "Sensore di prossimità", "Motore")
     """
     sigla = models.CharField(max_length = 5)
-    descrizione = models.CharField(max_length = 60)
+    descrizione = CharField(max_length = 30)
+    traduzione = models.ManyToManyField(Descrizione, 
+                                        through='Traduzioni',
+                                        through_fields=('sigla','lingua'),)
     tipo_componente = models.ForeignKey(TipoComponente, on_delete=models.CASCADE)
 
     def __str__(self):
