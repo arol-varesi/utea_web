@@ -1,6 +1,7 @@
 from django.db import models
 # from django.contrib.auth.models import User
 # from django.urls import reverse
+from core.models import Lingua
 
 # Create your models here.
 
@@ -33,7 +34,6 @@ class Sigla(models.Model):
     sigla = models.CharField(max_length = 5)
     descrizione = models.CharField(max_length = 30)
     tipo = models.ForeignKey(Tipo_componente, on_delete=models.CASCADE)
-    traduzione = models.ManyToManyField("Traduzione")
 
     def __str__(self):
         return self.sigla
@@ -46,11 +46,13 @@ class Traduzione(models.Model):
 #    """
 #    Tabella delle traduzioni delle descrizioni delle sigle
 #    """
-    lingua = models.ForeignKey("core.Lingua", on_delete=models.CASCADE)
+    sigla = models.ForeignKey('Sigla', on_delete=models.CASCADE)
+    lingua = models.ForeignKey(Lingua, on_delete=models.CASCADE)
     traduzione = models.CharField(max_length = 30)
 
     def __str__(self):
-        return f"{self.lingua}:{self.traduzione}"
+        return f"{self.lingua}: {self.traduzione}"
 
     class Meta:
         verbose_name_plural = "traduzioni"
+        unique_together = ("sigla", "lingua")

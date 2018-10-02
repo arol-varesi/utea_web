@@ -10,12 +10,12 @@ class Lingua(models.Model):
     originale : è la lingua in originale (es: english, deutsche)
     sigla     : è la sigla internazionale (es. EN, DE)
     """
+    id = models.CharField(max_length = 2, primary_key = True)
     lingua = models.CharField(max_length = 20)
     originale = models.CharField(max_length = 20)
-    sigla = models.CharField(max_length = 2)
 
     def __str__(self):
-        return self.sigla
+        return self.id
 
     class Meta:
         verbose_name = "lingua"
