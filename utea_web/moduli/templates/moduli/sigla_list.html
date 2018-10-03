@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Sigle</h2>
+  <ul>
+    {% for sigla in object_list %}
+    <li>{{ sigla.sigla }} : {{ sigla.descrizione }} ({{ sigla.traduzione.id_EN }})</li>
+    {% endfor %}
+  </ul>
+
+
+{% endblock content %}

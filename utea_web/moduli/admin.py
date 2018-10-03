@@ -10,7 +10,8 @@ class TraduzioneInLine(admin.TabularInline):
 
 @admin.register(Sigla)
 class SiglaModelAdmin(admin.ModelAdmin):
-    list_display = ('sigla', 'descrizione')
+    list_filter = ('sigla', 'tipo', )
+    list_display = ('sigla', 'descrizione', 'tipo',)
     inlines = [
         TraduzioneInLine,
     ]
@@ -22,4 +23,3 @@ class TraduzioneModelAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Tipo_componente)
-admin.site.register(core_lingua)
