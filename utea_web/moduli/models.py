@@ -35,11 +35,15 @@ class Sigla(models.Model):
     descrizione = models.CharField(max_length = 60)
     tipo = models.ForeignKey(Tipo_componente, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = "sigle"
+        ordering = ["sigla"]
+
     def __str__(self):
         return self.sigla
 
-    class Meta:
-        verbose_name_plural = "sigle"
+    def get_traduzione(self, lingua):
+        return Traduzione.objects.get(lingua=lingua , sigla=self.pk)
 
 
 class Traduzione(models.Model):
