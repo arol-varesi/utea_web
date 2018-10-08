@@ -40,8 +40,8 @@ INSTALLED_APPS = [
 
     'core',     # Homepage and global views
     'accounts',
-    'moduli',
-
+    'moduli',   # Gestione delle specifiche funzionali
+    'distinte', # Gestione della distinta di componenti
 ]
 
 MIDDLEWARE = [
