@@ -32,14 +32,18 @@ class Sigla(models.Model):
         (es. "Fotocellula", "Sensore di prossimità", "Motore")
     """
     sigla = models.CharField(max_length = 5)
-    descrizione = models.CharField(max_length = 30)
+    descrizione = models.CharField(max_length = 60)
     tipo = models.ForeignKey(Tipo_componente, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = "sigle"
+        ordering = ["sigla"]
 
     def __str__(self):
         return self.sigla
 
-    class Meta:
-        verbose_name_plural = "sigle"
+    def get_traduzione(self, lingua):
+        return Traduzione.objects.get(lingua=lingua , sigla=self.pk)
 
 
 class Traduzione(models.Model):
@@ -48,7 +52,7 @@ class Traduzione(models.Model):
 #    """
     sigla = models.ForeignKey('Sigla', on_delete=models.CASCADE)
     lingua = models.ForeignKey(Lingua, on_delete=models.CASCADE)
-    traduzione = models.CharField(max_length = 30)
+    traduzione = models.CharField(max_length = 60)
 
     def __str__(self):
         return f"{self.lingua}: {self.traduzione}"

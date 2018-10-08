@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+{{ block.super }} - Sigle
+{% endblock head_title%}
+
+{% block content %}
+
+<h2>Sigle</h2>
+  <table class="table table-striped table-hover table-sm ">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"> Sigla </th>
+        <th scope="col"> Descrizione </th>
+        {% for lng in lingua %}
+        <th scope="col">{{ lng.id }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+        {% for sigla in sigla_list %}
+        <tr>
+          <th scope="row"> {{ sigla.sigla }} </th>
+          <td> {{ sigla.descrizione }} </td>
+            {% for lng in lingua.all %}
+              <td>
+              {% for trad in sigla.traduzione_set.all %}
+                  {% if trad.lingua.id == lng.id %}
+                    {{ trad.traduzione }}
+                  {% endif %}
+              {% endfor %}
+              </td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}
