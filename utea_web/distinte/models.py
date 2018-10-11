@@ -9,7 +9,7 @@ class DBMag(models.Model):
     arol_code = models.CharField(max_length = 12)
     commercial_code = models.CharField(max_length = 30)
     description = models.CharField(max_length = 50)
-    manufacturer = models.ForeignKey("Marca")
+    manufacturer = models.ForeignKey("Marca", on_delete=models.CASCADE)
     supplementary_description = models.TextField()
 
     def __str__(self):
@@ -27,7 +27,17 @@ class Macro(models.Model):
     Esempio tipico sono : fotocellula + cavetto + catarinfrangente
     """
     macro = models.CharField(max_length = 10)
-    famiglia = models.ForeignKey("Famiglia")
-    marca = models.ForeignKey("Macro")
-    tags = models.ManyToMany("Tag")
-    componenti = models.ManyToMany("DBMag")
+    famiglia = models.ForeignKey("Famiglia", on_delete=models.CASCADE)
+    marca = models.ForeignKey("Marca", on_delete=models.CASCADE)
+    tags = models.ManyToManyField("Tag")
+    componenti = models.ManyToManyField("DBMag")
+
+
+class Famiglia(models.Model):
+    pass
+
+class Marca(models.Model):
+    pass
+
+class Tag(models.Model):
+    pass

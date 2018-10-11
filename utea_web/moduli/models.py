@@ -56,3 +56,38 @@ class Traduzione(models.Model):
     class Meta:
         verbose_name_plural = "traduzioni"
         unique_together = ("sigla", "lingua")
+
+
+
+class Modulo(models.Model):
+    """
+    Per modulo si intende un gruppo funzionale della macchina,
+    esempi di moduli sono:
+    . Orientatore centrifugo a selezione interna (doppio formato)
+    . Canale tappi con doppio Sensore
+    . Pressostato
+    E' formato dai seguenti campi:
+    id = identificativo es: CENT_SELINT_2FR
+    descrizione = descrizione estesa del modulo
+    tipo = punta al tipo di modulo : es: Orientatore
+    opzione = se True indica che si tratta di un'opzione del tipo di modulo
+    """
+    id_modulo = models.CharField(max_length = 20)
+    descrizione = models.CharField(max_length = 60)
+    tipo = models.ForeignKey('TipoModulo', on_delete=models.CASCADE)
+    # opzione = models.BooleanField()
+
+    def __str__(self):
+        return f"{self.id_modulo}: {self.descrizione}"
+
+    class Meta:
+        verbose_name_plural = "moduli"
+
+
+class TipoModulo(models.Model):
+    tipo = models.CharField(max_length = 20)
+
+
+    class Meta:
+        verbose_name = "tipo di modulo"
+        verbose_name_plural = "tipi di modulo"

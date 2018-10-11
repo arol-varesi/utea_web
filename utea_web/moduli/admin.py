@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tipo_componente, Sigla, Traduzione
+from .models import Tipo_componente, Sigla, Traduzione, Modulo, TipoModulo
 from core.models import Lingua as core_lingua
 
 # Personalizzazione dell'applicazione admin
@@ -23,3 +23,6 @@ class TraduzioneModelAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Tipo_componente)
+
+admin.site.register(Modulo)
+admin.site.register(TipoModulo)
