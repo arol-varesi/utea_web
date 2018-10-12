@@ -72,22 +72,45 @@ class Modulo(models.Model):
     tipo = punta al tipo di modulo : es: Orientatore
     opzione = se True indica che si tratta di un'opzione del tipo di modulo
     """
-    id_modulo = models.CharField(max_length = 20)
+    id = models.CharField(max_length = 20, primary_key = True)
     descrizione = models.CharField(max_length = 60)
     tipo = models.ForeignKey('TipoModulo', on_delete=models.CASCADE)
-    # opzione = models.BooleanField()
+    opzione = models.BooleanField(default = False)
 
     def __str__(self):
-        return f"{self.id_modulo}: {self.descrizione}"
+        return f"{self.id}"
 
     class Meta:
         verbose_name_plural = "moduli"
 
 
 class TipoModulo(models.Model):
+    """
+    Il tipo di modulo serve per categorizzare in vari moduli in modo
+    che siano facilmente ricercabili nel momento dell'utilizzo.
+    """
     tipo = models.CharField(max_length = 20)
 
+    def __str__(self):
+        return f"{self.tipo}"
 
     class Meta:
         verbose_name = "tipo di modulo"
         verbose_name_plural = "tipi di modulo"
+
+class SiglaInModulo(models.Model):
+    """
+    Contiene la lista delle sigle funzionali che compongono il modulo.
+    Per ogni sigla oltre al link alla tabella sigla viene abbinato
+    anche una Stringa utilizzata per poter personalizzare la sigla
+    ad esempio la B1 potrebbe essere indicata come B1A.
+    Esempio "B1{0}"  "B1{1}" supponendo di passare alla configurazione
+    il seguente parametro 'suffisso' : ('C' , 'D') si ottengono le seguenti due
+    sigle : B1C e B1D
+    """
+    modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE)
+    sigla = models.ForeignKey(Sigla, on_delete=models.CASCADE)
+    etichetta = models.CharField(max_length = 15)
+
+    def __str__(self):
+        return f"{self.sigla} : {self.sigla.descrizione}"
