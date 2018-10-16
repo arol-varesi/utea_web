@@ -2,11 +2,17 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Sigla, Tipo_componente, Traduzione
+from .forms import SiglaForm
 
 # Create your views here.
 
 class SigleView(ListView):
     model = Sigla
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['edit_form'] = SiglaForm
+        return context
 
 
 class SiglaNewView(CreateView):
