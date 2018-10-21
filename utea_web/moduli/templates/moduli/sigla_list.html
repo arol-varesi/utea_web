@@ -54,7 +54,6 @@
 </div>
 
 
-
 <h2>Sigle</h2>
   <table class="table table-sm table-striped">
     <thead class="thead-dark">
@@ -80,7 +79,7 @@
           </td>
           <td>
             <!--- Button trigger modal -->
-            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#deleteModal" data-name={{sigla.sigla}} data-action="{% url 'sigla-delete' pk=sigla.pk %}">
+            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#deleteModal" data-name={{sigla.sigla}} data-action="{% url 'moduli:sigla-delete' pk=sigla.pk %}">
               <i class="far fa-trash-alt" title="Delete"></i>
             </button>
           </td>
@@ -89,13 +88,14 @@
     </tbody>
   </table>
 
-  <a class="btn btn-sm btn-info" href="{% url 'sigla-new' %}">Aggiungi Sigla</a>
+  <a class="btn btn-sm btn-info" href="{% url 'moduli:sigla-new' %}">Aggiungi Sigla</a>
 
 {% endblock content %}
 
 {% block script %}
 {{ block.super }}
   <script>
+    $(document).ready(function(){
       $("#deleteModal").on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var act = button.data('action') // Extract info from data-* attributes
@@ -113,6 +113,7 @@
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
       })
+    })
 
 
   </script>

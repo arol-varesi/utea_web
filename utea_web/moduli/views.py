@@ -19,6 +19,7 @@ class SiglaNewView(CreateView):
     model = Sigla
     fields = ['sigla', 'descrizione', 'tipo']
     success_url = "/moduli/sigle/"
+#    success_url = reverse('moduli:sigle')
 
 class SiglaEditView(UpdateView):
     model = Sigla

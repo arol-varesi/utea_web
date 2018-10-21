@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import SigleView, SiglaNewView, SiglaEditView, SiglaDeleteView
 
+app_name = 'moduli'
 urlpatterns = [
     path('sigle/', SigleView.as_view(), name='sigle'),
     path('sigle/new/', SiglaNewView.as_view(), name='sigla-new'),
