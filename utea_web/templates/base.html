@@ -9,13 +9,20 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
         <!-- FontAwesome CSS - load all styles -->
         <link rel="stylesheet" href="{% static 'css/all.css' %}">
+
 
         <title>{% block head_title %}UTEA WebHome{% endblock head_title%}</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+
+        <!-- Menu Bar --->
+
+        <nav class="navbar navbar-expand-sm navbar-fixed-top navbar-dark bg-dark">
             <a class="navbar-brand" href="/">AROL-UTEA</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -70,11 +77,60 @@
               </ul>
             </div>
         </nav>
-        <div class="container">
-            {% block content %}
 
-            {% endblock content %}
+        <div class="wrapper">
+
+          <!-- Sidebar -->
+          <nav id="sidebar">
+            <div class="sidebar-header">
+              <h3>Menu</h3>
+            </div>
+            <ul class="list-unstyled components">
+              <p>Dummy Heading</p>
+              <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">Home 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 3</a>
+                    </li>
+                </ul>
+              </li>
+              <hr>
+              <li>
+                {% block lmenu %}
+
+                {% endblock lmenu %}
+              </li>
+
+            </ul>
+          </nav>
+
+
+          <!-- Page Content -->
+          <div class="content">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                  <div class="container-fluid">
+
+                      <button type="button" id="sidebarCollapse" class="btn btn-info">
+                          <i class="fas fa-align-left"></i>
+                          <span>Toggle Sidebar</span>
+                      </button>
+
+                  </div>
+              </nav>
+              {% block content %}
+
+              {% endblock content %}
+          </div>
+
         </div>
+
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -83,5 +139,13 @@
         <script src="{% static 'js/bootstrap.min.js'%}"></script>
         {% block script %}
         {% endblock script %}
+        <script type="text/javascript">
+          $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active'); });
+          });
+        </script>
+
+
     </body>
 </html>
