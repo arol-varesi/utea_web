@@ -22,7 +22,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
-          <input type="submit" class="btn btn-primary" value="Salva">
+          <input type="submit" class="btn btn-primary" value="OK">
         </div>
       </form>
     </div>
@@ -73,9 +73,9 @@
           <td>{{ sigla.tipo.tipo}}</td>
           <td>
             <!--- Button trigger modal -->
-            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#editModal" data-name={{sigla.sigla}} data-action="#">
+            <a class="btn btn-outline-secondary" href="{% url 'moduli:sigla-edit' pk=sigla.pk %}" data-toggle="smodal" data-target="#editModal" data-name={{sigla.sigla}} data-action="#">
               <i class="fas fa-edit" title="Edit"></i>
-            </button>
+            </a>
           </td>
           <td>
             <!--- Button trigger modal -->
