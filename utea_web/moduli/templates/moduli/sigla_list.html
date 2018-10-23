@@ -1,23 +1,7 @@
 {% extends 'base.html' %}
 
-{% block title %}
-  {{ block.super }} Sigle
-{% endblock title %}
 
-{% block lmenu %}
-  <ul>
-    {% for lng in lingua %}
-    <li>{{ lng.id }}</li>
-    {% endfor %}
-  </ul>
-{% endblock lmenu %}
-
-{% block breadcrumb %}
-  <ol class="breadcrumb my-4">
-    <li class="breadcrumb-item"> <a href="{% url 'home' %}">Moduli</a></li>
-    <li class="breadcrumb-item active">Sigle</li>
-  </ol>
-{% endblock breadcrumb %}
+{% block head_title %}{{ block.super }} Sigle {% endblock head_title%}
 
 
 {% block content %}
@@ -69,8 +53,6 @@
     </div>
   </div>
 </div>
-
-
 
 
 <h2>Sigle</h2>

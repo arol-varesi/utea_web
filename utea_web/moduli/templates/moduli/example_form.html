@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block breadcrumb %}
+  <ol class="breadcrumb my-4">
+    <li class="breadcrumb-item"> <a href="{% url 'home' %}">Moduli</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'moduli:sigle-list-edit' %}">
+      Sigle
+    </a></li>
+    <li class="breadcrumb-item active">  {{ object }} </li>
+  </ol>
+{% endblock breadcrumb %}
+
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <input type="submit" value="Salva">
+</form>
+
+{% endblock content %}
