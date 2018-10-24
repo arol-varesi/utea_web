@@ -31,9 +31,9 @@ class Sigla(models.Model):
     Ad ogni sigla è abbinato una tipologia di componente (ForeignKey)
         (es. "Fotocellula", "Sensore di prossimità", "Motore")
     """
-    sigla = models.CharField(max_length = 5)
-    descrizione = models.CharField(max_length = 60)
-    tipo = models.ForeignKey(Tipo_componente, on_delete=models.CASCADE)
+    sigla = models.CharField(max_length = 5, help_text="Lunghezza massima 5 caratteri")
+    descrizione = models.CharField(max_length = 60, help_text="Lunghezza massima 60 caratteri")
+    tipo = models.ForeignKey(Tipo_componente, on_delete=models.CASCADE, help_text="Seleziona da lista")
 
     def __str__(self):
         return self.sigla

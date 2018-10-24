@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'widget_tweaks',
     'core',     # Homepage and global views
     'accounts',
     'moduli',   # Gestione delle specifiche funzionali

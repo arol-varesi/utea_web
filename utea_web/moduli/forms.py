@@ -13,3 +13,8 @@ class ExampleForm(ModelForm):
     class Meta:
         model = Sigla
         fields = '__all__'
+
+class NewSigla(ModelForm):
+    class Meta:
+        model = Sigla
+        fields = '__all__'

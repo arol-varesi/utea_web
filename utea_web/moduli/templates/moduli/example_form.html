@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
+{% load widget_tweaks %}
 
 {% block breadcrumb %}
   <ol class="breadcrumb my-4">
@@ -12,12 +12,24 @@
   </ol>
 {% endblock breadcrumb %}
 
-
 {% block content %}
-<form method="post">
+<form method="post" novalidate>
   {% csrf_token %}
-  {{ form|crispy }}
-  <input type="submit" value="Salva">
+  {% for field in form %}
+    <div class="form-group">
+      {{ field.label_tag }}
+
+      {% render_field field class="form-control" %}
+
+      {% if field.help_text %}
+        <small class="form-text text-muted">
+          {{ field.help_text }}
+        </small>
+      {% endif %}
+    </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn-success">Salva</button>
 </form>
 
 {% endblock content %}

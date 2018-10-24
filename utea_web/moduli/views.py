@@ -1,11 +1,22 @@
-from django.shortcuts import render
-from django.urls import reverse
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse
+from core.models import Lingua
 from .models import Sigla, Tipo_componente, Traduzione
 from .forms import SiglaForm, ExampleForm
-from core.models import Lingua
 
-# Create your views here.
+def new_sigla(request):
+    user = User.objects.first() # TODO: get the current logged in user
+    if request.method == 'POST':
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            sigla = form.save(commit=False)
+            sigla.save()
+            return redirect('moduli:sigle')
+    else:
+        form = ExampleForm()
+    return render(request, 'moduli/new_sigla.html', {'form' : form })
 
 class SigleView(ListView):
     model = Sigla

@@ -46,33 +46,6 @@
   </div>
 </div>
 
-<!-- editModal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form name="sigla_edit_form" action="#" method="POST">
-        <div class="modal-body">
-            {% csrf_token %}
-            {{ edit_form }}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">NO !!</button>
-          <input type="submit" class="btn btn-danger" value="Confermo">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-
-
 <h2>Sigle</h2>
   <table class="table table-sm table-striped">
     <thead class="thead-dark">
@@ -92,7 +65,7 @@
           <td>{{ sigla.tipo.tipo}}</td>
           <td>
             <!--- Button trigger modal -->
-            <a class="btn btn-sm btn-outline-secondary" href="{% url 'moduli:example-edit' pk=sigla.pk %}" data-toggle="smodal" data-target="#editModal" data-name={{sigla.sigla}} data-action="#">
+            <a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="smodal" data-target="#editModal" data-name={{sigla.sigla}} data-action="#">
               <i class="fas fa-edit" title="Edit"></i>
             </a>
           </td>
@@ -107,7 +80,7 @@
     </tbody>
   </table>
 
-  <a class="btn btn-sm btn-info" href="{% url 'moduli:sigla-new' %}">Aggiungi Sigla</a>
+  <a class="btn btn-sm btn-info" href="{% url 'moduli:new-sigla' %}">Aggiungi Sigla</a>
 
 {% endblock content %}
 
@@ -124,13 +97,6 @@
         var modal = $(this)
         modal.find('.modal-title').text('Delete ' + recipient)
         document['confirm_delete_form'].action = act
-      })
-
-      $("#editModal").on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('name')
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
       })
     })
 
