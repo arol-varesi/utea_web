@@ -1,0 +1,8 @@
+@font-face {
+  font-family: PermanentMarker;
+  src: url('../fonts/PermanentMarker-Regular.ttf') format("ttf"),
+}
+
+.navbar-brand {
+  font-family: PermanentMarker, cursive;
+}

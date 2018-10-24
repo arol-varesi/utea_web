@@ -3,13 +3,11 @@
 {% load widget_tweaks %}
 
 {% block breadcrumb %}
-  <ol class="breadcrumb my-4">
-    <li class="breadcrumb-item"> <a href="{% url 'home' %}">Moduli</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'moduli:sigle-list-edit' %}">
-      Sigle
-    </a></li>
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Moduli</a></li>
+    <li class="breadcrumb-item">
+      <a href="{% url 'moduli:sigle-list-edit' %}">Sigle</a>
+    </li>
     <li class="breadcrumb-item active">  {{ object }} </li>
-  </ol>
 {% endblock breadcrumb %}
 
 {% block content %}

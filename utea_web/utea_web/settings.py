@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'widget_tweaks',
     'core',     # Homepage and global views
-    'accounts',
-    'moduli',   # Gestione delle specifiche funzionali
-    'distinte', # Gestione della distinta di componenti
+    'accounts', # User management
+    'moduli',   # Functional modules
+    'distinte', # MAchine Configurator and Specification
 ]
 
 MIDDLEWARE = [
