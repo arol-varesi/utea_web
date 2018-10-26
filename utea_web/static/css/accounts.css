@@ -3,11 +3,11 @@ body {
 }
 
 .logo {
-  font-family: PermanentMarker, cursive;
+  font-family: PermanentMarker, bold;
 }
 
 .logo a {
-  color: rgba(0,0,0,.9);
+  color: rgba(0,0,0,0.9);
 }
 
 .logo a:hover,
