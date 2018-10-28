@@ -23,7 +23,8 @@ def new_sigla(request):
 
 class SigleView(ListView):
     model = Sigla
-    template_name = "moduli/sigla_list_edit.html"
+    fields = ['sigla', 'descrizione', 'tipo']
+    success_url = reverse_lazy('moduli:sigle-list')
 
 class TraduzioniInLine(InlineFormSet):
     model = Traduzione
