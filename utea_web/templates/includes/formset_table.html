@@ -1,0 +1,25 @@
+<table class="table">
+  {% with form_head=formset|first %}
+  <thead>
+    <tr>
+      {% for head in form_head %}
+        {% if not head.is_hidden %}
+          <th scope="col">{{ head.label }}
+        {% endif %}
+      {% endfor %}
+      </th>
+    </tr>
+  </thead>
+  {% endwith %}
+  <tbody>
+      {% for line in formset %}
+      <tr>
+        {% for record in line %}
+          {% if not record.is_hidden %}
+            <td>{{ record }}</td>
+          {% endif %}
+        {% endfor %}
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>

@@ -63,7 +63,7 @@
           <td>{{ sigla.tipo.tipo}}</td>
           <td>
             <!--- Button trigger modal -->
-            <a class="btn btn-sm btn-outline-secondary" href="#" data-toggle="smodal" data-target="#editModal" data-name={{sigla.sigla}} data-action="#">
+            <a class="btn btn-sm btn-outline-secondary" href="{% url 'moduli:sigla-edit' pk=sigla.pk%}" data-toggle="smodal" data-target="#editModal" data-name={{sigla.sigla}} data-action="#">
               <i class="fas fa-edit" title="Edit"></i>
             </a>
           </td>
@@ -78,7 +78,7 @@
     </tbody>
   </table>
 
-  <a class="btn btn-sm btn-info" href="{% url 'moduli:new-sigla' %}">Aggiungi Sigla</a>
+  <a class="btn btn-sm btn-info" href="{% url 'moduli:new-sigla'%}">Aggiungi Sigla</a>
 
 {% endblock content %}
 

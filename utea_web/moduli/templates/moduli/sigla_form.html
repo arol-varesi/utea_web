@@ -1,13 +1,29 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Moduli</a></li>
+    <li class="breadcrumb-item">
+      <a href="{% url 'moduli:sigle-list' %}">Sigle</a>
+    </li>
+      <li class="breadcrumb-item active">{% if object %}{{ object }}{% else %}Nuova{% endif %}</li>
+{% endblock breadcrumb %}
 
 {% block content %}
-
-<form method="post">
+<form method="post" novalidate>
   {% csrf_token %}
-  {{ form|crispy }}
-  <input type="submit" value="Salva">
+  {% include 'includes/form.html' %}
+
+  <hr>
+
+  <button type="submit" class="btn btn-success">Salva</button>
+
+  <hr>
+  <h2>Traduzioni</h2>
+  {% include 'includes/formset_table.html' %}
+
 </form>
+
 
 {% endblock content %}
