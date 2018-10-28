@@ -1,20 +1,10 @@
 from django.forms import ModelForm
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
-from .models import Sigla
+from django.forms.models import inlineformset_factory
+from .models import Sigla, Traduzione
 
 class SiglaForm(ModelForm):
     class Meta:
         model = Sigla
         fields = ['sigla', 'descrizione', 'tipo']
 
-
-class ExampleForm(ModelForm):
-    class Meta:
-        model = Sigla
-        fields = '__all__'
-
-class NewSigla(ModelForm):
-    class Meta:
-        model = Sigla
-        fields = '__all__'
+TraduzioniFormSet = inlineformset_factory(Sigla, Traduzione, extra=1, fields=('lingua','traduzione'))
