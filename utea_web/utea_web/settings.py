@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
     'widget_tweaks',
     'core',     # Homepage and global views
     'accounts', # User management
@@ -111,7 +110,7 @@ LOGIN_REDIRECT_URL = 'home'
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'it'
+LANGUAGE_CODE = 'en_US'
 
 TIME_ZONE = 'UTC'
 

@@ -20,8 +20,11 @@
   <button type="submit" class="btn btn-success">Salva</button>
 
   <hr>
+  {% for formset in inlines %}
   <h2>Traduzioni</h2>
+
   {% include 'includes/formset_table.html' %}
+  {% endfor %}
 
 </form>
 
