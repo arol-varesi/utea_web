@@ -5,7 +5,7 @@
 {% block breadcrumb %}
     <li class="breadcrumb-item"><a href="{% url 'home' %}">Moduli</a></li>
     <li class="breadcrumb-item">
-      <a href="{% url 'moduli:sigle-list' %}">Sigle</a>
+      <a href="{% url 'sigle:sigle-list' %}">Sigle</a>
     </li>
       <li class="breadcrumb-item active">{% if object %}{{ object }}{% else %}Nuova{% endif %}</li>
 {% endblock breadcrumb %}

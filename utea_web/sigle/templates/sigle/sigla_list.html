@@ -74,13 +74,13 @@
           <td>{{ sigla.tipo.tipo}}</td>
           <td>
             <!--- Button trigger modal -->
-            <a class="btn btn-outline-secondary" href="{% url 'moduli:sigla-edit' pk=sigla.pk %}" data-toggle="smodal" data-target="#editModal" data-name={{sigla.sigla}} data-action="#">
+            <a class="btn btn-outline-secondary" href="{% url 'sigle:sigla-edit' pk=sigla.pk %}" data-toggle="smodal" data-target="#editModal" data-name={{sigla.sigla}} data-action="#">
               <i class="fas fa-edit" title="Edit"></i>
             </a>
           </td>
           <td>
             <!--- Button trigger modal -->
-            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#deleteModal" data-name={{sigla.sigla}} data-action="{% url 'moduli:sigla-delete' pk=sigla.pk %}">
+            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#deleteModal" data-name={{sigla.sigla}} data-action="{% url 'sigle:sigla-delete' pk=sigla.pk %}">
               <i class="far fa-trash-alt" title="Delete"></i>
             </button>
           </td>
@@ -89,7 +89,7 @@
     </tbody>
   </table>
 
-  <a class="btn btn-sm btn-info" href="{% url 'moduli:sigla-new' %}">Aggiungi Sigla</a>
+  <a class="btn btn-sm btn-info" href="{% url 'sigle:sigla-new' %}">Aggiungi Sigla</a>
 
 {% endblock content %}
 

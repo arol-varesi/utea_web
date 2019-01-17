@@ -35,5 +35,5 @@ urlpatterns = [
         name = 'password_reset_done'),
     path('utenti/', include('accounts.urls')),
     path('utenti/', include('django.contrib.auth.urls')),
-    path('moduli/', include('moduli.urls'))
+    path('sigle/', include('sigle.urls'))
 ]
