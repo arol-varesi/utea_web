@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"> <a href="{% url 'home' %}">Moduli</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'sigle:sigle-list-edit' %}">Sigle</a></li>
+    <li class="breadcrumb-item active">Nuova</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<form method="POST" novalidate>
+  {% csrf_token %}
+  {% include 'includes/form.html' %}
+  <button type="submit" class="btn btn-success">Salva</button>
+</form>
+
+{% endblock content %}

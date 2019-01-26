@@ -1,0 +1,91 @@
+@startuml
+' uncomment the line below if you're using computer with a retina display
+' skinparam dpi 300
+!define Table(name,desc) class name as "desc" << (T,#FFAAAA) >>
+' we use bold for primary key
+'' green color for unique
+' and underscore for not_null
+!define PK(x) <b>x</b>
+!define UQ(x) <color:green>x</color>
+!define NN(x) <i>x</i>
+!define FK(x,y) - <back:yellow><b><u>x</u></b></back>  --> [y]
+' other tags available:
+' <i></i>
+' <back:COLOR></color>, where color is a color name or html color code
+' (#FFAACC)
+' see: http://plantuml.com/classes.html#More
+set namespaceseparator .
+hide circle
+hide methods
+hide stereotypes
+
+' entities
+center header STRUTTURA DEL DATABASE
+
+
+' Legenda '
+note as N1
+  Legenda
+  ==
+  PK(primary key)
+  UQ(unique)
+  NN(Not null)
+  FK(ForeignKey,table)
+end note
+
+
+Table(core.lingua, "Lingua") {
+  PK(id) CharField[2]
+  lingua CharField[20]
+  originale CharField[20]
+}
+
+Table(moduli.tipo_componente, "TipoComponente") {
+  PK(id)
+  tipo CharField[30]
+  UQ(prefisso) CharField[3]
+}
+
+Table(moduli.sigla, "Sigla") {
+  PK(id)
+  UQ(sigla) CharField[5]
+  descrizione CharField[60]
+  FK(tipo,TipoComponente)
+}
+moduli.sigla -|> moduli.tipo_componente
+
+Table(moduli.traduzione, "Traduzione") {
+  PK(id)
+  FK(sigla, Sigla)
+  FK(lingua, Lingua)
+  traduzione CharField[60]
+}
+moduli.traduzione  -u-|> moduli.sigla
+moduli.traduzione  -d-|> core.lingua
+
+
+Table(moduli.tipo_modulo, "TipoModulo"){
+  PK(id)
+  tipo CharField[20]
+}
+
+Table(moduli.modulo, "Modulo"){
+  PK(id) CharField[20]
+  descrizione CharField[60]
+  FK(tipo,TipoModulo)
+  opzione Boolean
+}
+moduli.modulo  -|> moduli.tipo_modulo
+
+Table(moduli.sigla_in_modulo, "SiglaInModulo"){
+  PK(id)
+  FK(modulo, Modulo)
+  FK(sigla, Sigla)
+  etichetta CharField[15]
+}
+moduli.sigla_in_modulo -u-|> moduli.modulo
+moduli.sigla_in_modulo -u-|> moduli.sigla
+
+
+
+@enduml

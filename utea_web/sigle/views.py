@@ -1,0 +1,53 @@
+from django.contrib.auth.models import User
+from django.forms import inlineformset_factory
+from django.shortcuts import render
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from extra_views import InlineFormSet, UpdateWithInlinesView, CreateWithInlinesView
+from core.models import Lingua
+from .models import Sigla, Tipo_componente, Trad_sigla
+from .forms import SiglaForm, TraduzioniFormSet
+
+
+def new_sigla(request):
+    user = User.objects.first() # TODO: get the current logged in user
+    if request.method == 'POST':
+        form = SiglaForm(request.POST)
+        if form.is_valid():
+            sigla = form.save(commit=False)
+            sigla.save()
+            return redirect('sigle:sigle')
+    else:
+        form = SiglaForm()
+    return render(request, 'sigle/new_sigla.html', {'form' : form })
+
+
+class SigleView(ListView):
+    model = Sigla
+    fields = ['sigla', 'descrizione', 'tipo']
+    success_url = reverse_lazy('sigle:sigle-list')
+
+class TraduzioniInLine(InlineFormSet):
+    model = Trad_sigla
+    factory_kwargs = {'extra': 1}
+    fields = '__all__'
+
+class SiglaNewView(CreateWithInlinesView):
+    model = Sigla
+    fields = ['sigla', 'descrizione', 'tipo']
+    inlines = [TraduzioniInLine, ]
+    success_url = reverse_lazy('sigle:sigle-list')
+
+
+class SiglaEditView(UpdateWithInlinesView):
+    model = Sigla
+    fields = ['sigla', 'descrizione', 'tipo']
+    inlines = [TraduzioniInLine, ]
+    #success_url = reverse_lazy('sigle:sigle-list', pk)
+    #success_url = reverse_lazy('sigle:sigle-list')
+
+
+class SiglaDeleteView(DeleteView):
+    """ utilizza in automatico il template : sigla_confirm_delete.html """
+    model = Sigla
+    success_url = "/sigle/sigle/"

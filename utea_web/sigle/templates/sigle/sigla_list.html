@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+
+{% block head_title %}{{ block.super }} Sigle {% endblock head_title%}
+
+
+{% block content %}
+
+<!-- deleteModal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form name="confirm_delete_form" action="#" method="POST">
+        <div class="modal-body">
+            {% csrf_token %}
+          <p>Sei sicuro di voler cancellare ?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+          <input type="submit" class="btn btn-primary" value="OK">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- editModal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form name="sigla_edit_form" action="#" method="POST">
+        <div class="modal-body">
+            {% csrf_token %}
+            {{ edit_form }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">NO !!</button>
+          <input type="submit" class="btn btn-danger" value="Confermo">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<h2>Sigle</h2>
+  <table class="table table-sm table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Sigla</th>
+        <th scope="col">Descrizione</th>
+        <th scope="col">Tipologia</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for sigla in object_list %}
+        <tr>
+          <th scope="row">{{ sigla.sigla }}</th>
+          <td>{{ sigla.descrizione }}</td>
+          <td>{{ sigla.tipo.tipo}}</td>
+          <td>
+            <!--- Button trigger modal -->
+            <a class="btn btn-outline-secondary" href="{% url 'sigle:sigla-edit' pk=sigla.pk %}" data-toggle="smodal" data-target="#editModal" data-name={{sigla.sigla}} data-action="#">
+              <i class="fas fa-edit" title="Edit"></i>
+            </a>
+          </td>
+          <td>
+            <!--- Button trigger modal -->
+            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#deleteModal" data-name={{sigla.sigla}} data-action="{% url 'sigle:sigla-delete' pk=sigla.pk %}">
+              <i class="far fa-trash-alt" title="Delete"></i>
+            </button>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a class="btn btn-sm btn-info" href="{% url 'sigle:sigla-new' %}">Aggiungi Sigla</a>
+
+{% endblock content %}
+
+{% block script %}
+{{ block.super }}
+  <script>
+    $(document).ready(function(){
+      $("#deleteModal").on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var act = button.data('action') // Extract info from data-* attributes
+        var recipient = button.data('name')
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Delete ' + recipient)
+        document['confirm_delete_form'].action = act
+      })
+
+      $("#editModal").on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('name')
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      })
+    })
+
+
+  </script>
+{% endblock script %}
