@@ -3,7 +3,7 @@
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"> <a href="{% url 'home' %}">Moduli</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'sigle:sigle-list-edit' %}">Sigle</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'sigle:sigle-test' %}">Sigle(test)</a></li>
     <li class="breadcrumb-item active">Nuova</li>
 {% endblock breadcrumb %}
 
@@ -11,6 +11,10 @@
 <form method="POST" novalidate>
   {% csrf_token %}
   {% include 'includes/form.html' %}
+
+  <h2>Traduzioni</h2>
+
+  {% include 'includes/formset_table.html' %}
   <button type="submit" class="btn btn-success">Salva</button>
 </form>
 

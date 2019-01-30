@@ -13,9 +13,11 @@
       {% endif %}
       <tr>
         {% for field in form %}
-          {% if not field.is_hidden %}
+
             <td type="hidden">
-              {{ field.label }}
+              {% if not field.is_hidden %}
+                {{ field.label }}
+              {% endif %}
               {% if form.is_bound %}
                 {% if field.errors %}
                   {% render_field field class="form-control is-invalid" %}
@@ -31,7 +33,6 @@
                 {% render_field field class="form-control" %}
               {% endif %}
             </td>
-          {% endif %}
         {% endfor %}
       </tr>
       {% endfor %}

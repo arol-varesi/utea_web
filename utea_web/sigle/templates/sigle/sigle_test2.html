@@ -14,7 +14,7 @@
 
 {% block breadcrumb %}
     <li class="breadcrumb-item"> <a href="{% url 'home' %}">Moduli</a></li>
-    <li class="breadcrumb-item active">Sigle(test2)</li>
+    <li class="breadcrumb-item active">Sigle(test)</li>
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -24,6 +24,7 @@
     <table class="table table-striped table-hover table-sm ">
       <thead class="thead-dark">
         <tr>
+          <th scope="col"></th>
           <th scope="col">Sigla</th>
           <th scope="col">Descrizione</th>
           {% for lng in lingua %}
@@ -34,11 +35,12 @@
       <tbody>
           {% for sigla in sigla_list %}
           <tr>
+            <th><a href="{% url 'sigle:sigla-edit-test' pk=sigla.pk %}"><i class="fas fa-edit"></i></a></th>
             <th scope="row">{{ sigla.sigla }}</th>
             <td>{{ sigla.descrizione }}</td>
               {% for lng in lingua.all %}
                 <td>
-                {% for trad in sigla.traduzione_set.all %}
+                {% for trad in sigla.trad_sigla_set.all %}
                     {% if trad.lingua.id == lng.id %}
                       {{ trad.traduzione }}
                     {% endif %}
@@ -51,6 +53,6 @@
     </table>
   </div>
 
-  <a class="btn btn-sm btn-info" href="{% url 'sigle:sigla-new' %}">Aggiungi Sigla</a>
+  <a class="btn btn-sm btn-info" href="{% url 'sigle:sigla-new-test' %}">Aggiungi Sigla</a>
 
 {% endblock content %}

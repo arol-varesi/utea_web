@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'core',     # Homepage and global views
     'accounts', # User management
     'sigle',    # Sigle componenti
-    'moduli',   # Functional modules
-    'distinte', # MAchine Configurator and Specification
+    #'moduli',   # Functional modules
+    #'distinte', # MAchine Configurator and Specification
 ]
 
 MIDDLEWARE = [
