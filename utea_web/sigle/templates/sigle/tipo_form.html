@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block body %}
+<div class="container">
+  <form method="post" novalidate id = "tipo-form">
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <input class="btn btn-primary" type="submit" name="some_name" value="Submit">
+  </form>
+</div>
+
+{% endblock body %}
