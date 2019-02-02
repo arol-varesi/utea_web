@@ -35,23 +35,23 @@ class TraduzioniInLine(InlineFormSet):
 
 class SiglaNewView(CreateWithInlinesView):
     model = Sigla
-    fields = ['sigla', 'descrizione', 'tipo']
+    form_class = SiglaForm
     inlines = [TraduzioniInLine, ]
     success_url = reverse_lazy('sigle:sigle-list')
 
 
 class SiglaEditView(UpdateWithInlinesView):
     model = Sigla
-    fields = ['sigla', 'descrizione', 'tipo']
+    form_class = SiglaForm
     inlines = [TraduzioniInLine, ]
     #success_url = reverse_lazy('sigle:sigle-list', pk)
     #success_url = reverse_lazy('sigle:sigle-list')
-
 
 class SiglaDeleteView(DeleteView):
     """ utilizza in automatico il template : sigla_confirm_delete.html """
     model = Sigla
     success_url = "/sigle/"
+
 
 def TipoCreatePopup(request):
     form = TipoComponenteForm(request.POST or None)

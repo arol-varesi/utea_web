@@ -1,0 +1,21 @@
+<div class="input-group">
+  <div class="input-group-prepend">
+    <button class="btn border" type="button"><a href="{{ widget.name }}/new" id='add_{{ widget.name }}' onclick="return showAddPopup(this);"><i class="fas fa-plus"></i></a></button>
+  </div>
+  <select name="{{ widget.name }}" class="custom-select" {% include "django/forms/widgets/attrs.html" %}>{% for group_name, group_choices, group_index in widget.optgroups %}{% if group_name %}
+    <optgroup label="{{ group_name }}">{% endif %}{% for option in group_choices %}
+    {% include option.template_name with widget=option %}{% endfor %}{% if group_name %}
+    </optgroup>{% endif %}{% endfor %}
+  </select>
+</div>
+
+
+<script type="text/javascript">
+  function showAddPopup(triggeringLink) {
+    var name = triggeringLink.id.replace(/^add_/, '');
+    href = triggeringLink.href;
+    var win = window.open(href, "Edit", 'height=500,width=800,resizable=yes,scrollbars=yes');
+    win.focus();
+    return false;
+  }
+</script>
